@@ -1,4 +1,4 @@
--- Задания 3.
+-- Р—Р°РґР°РЅРёРµ 3.
 SELECT
   count(id) AS '1)male_likes_2)female_likes'
   FROM likes
@@ -12,8 +12,22 @@ SELECT
   WHERE
   user_id IN 
   (SELECT user_id FROM profiles WHERE gender = "F")
+  
+-- UPD: Р”РѕСЂР°Р±РѕС‚Р°Р» СЂРµС€РµРЅРёРµ, С‚РµРїРµСЂСЊ РґР»СЏ РєР°Р¶РґРѕРіРѕ РіРµРЅРґРµСЂР° Р±СѓРґРµС‚ РѕС‚РґРµР»СЊРЅС‹Р№ СЃС‚РѕР»Р±РµС†.
+SELECT
+  (SELECT count(id)
+  FROM likes
+  WHERE
+  user_id IN 
+  (SELECT user_id FROM profiles WHERE gender = "M"))  AS 'male_likes',
+(SELECT
+  count(id)
+  FROM likes
+  WHERE
+  user_id IN 
+  (SELECT user_id FROM profiles WHERE gender = "F")) AS 'female_likes';
 
- -- Задание 4
+ -- Р·Р°РґР°РЅРёРµ 4
 SELECT user_id, COUNT(*) AS count
 FROM likes
 GROUP BY user_id
@@ -29,7 +43,5 @@ FROM messages
 GROUP BY from_user_id
 ;
 
--- Задание 5
+-- Р—Р°РґР°РЅРёРµ 5
 SELECT COUNT(id) AS summ FROM LIKES where TARGET_ID IN (SELECT id FROM messages order by CREATED_AT DESC LIMIT 10);
-
--- Первое и второе задание решены в дампе
