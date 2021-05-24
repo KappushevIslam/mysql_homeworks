@@ -1,5 +1,4 @@
--- Практическое задание по теме “Транзакции, переменные, представления”
-
+-- Transactions etc.
 -- Task 1
 START TRANSACTION;
 INSERT INTO sample.users (SELECT * FROM shop.users WHERE shop.users.id = 1);
@@ -59,37 +58,33 @@ WHErE created_at NOT IN (
 	) AS five
 ) ORDER BY created_at DESC;
 
--- Практическое задание по теме “Хранимые процедуры и функции, триггеры"
+-- Triggers etc.
 
 -- Task 1
 DELIMITER //
-
 
 DROP PROCEDURE IF EXISTS hello;
 CREATE PROCEDURE hello()
 BEGIN
 	IF(CURTIME() > '06:00:00' AND CURTIME() < '12:00:00') THEN
-		SELECT 'Доброе утро';
+		SELECT 'Г„Г®ГЎГ°Г®ГҐ ГіГІГ°Г®';
 	ELSEIF(CURTIME() > '12:00:00' AND CURTIME() < '18:00:00') THEN
-		SELECT 'Добрый день';
+		SELECT 'Г„Г®ГЎГ°Г»Г© Г¤ГҐГ­Гј';
 	ELSEIF(CURTIME() > '18:00:00' AND CURTIME() < '00:00:00') THEN
-		SELECT 'Добрый вечер';
+		SELECT 'Г„Г®ГЎГ°Г»Г© ГўГҐГ·ГҐГ°';
 	ELSE
-		SELECT 'Доброй ночи';
+		SELECT 'Г„Г®ГЎГ°Г®Г© Г­Г®Г·ГЁ';
 	END IF;
 END //
 
-CALL hello();
-
-delimiter //;
 -- The best option
 CREATE FUNCTION `hello`() RETURNS text
 BEGIN
   RETURN CASE
-      WHEN "06:00" <= CURTIME() AND CURTIME() < "12:00" THEN "Доброе утро";
-      WHEN "12:00" <= CURTIME() AND CURTIME() < "18:00" THEN "Добрый День";
-      WHEN "18:00" <= CURTIME() AND CURTIME() < "00:00" THEN "Добрый вечер";
-      ELSE "Доброй ночи";
+      WHEN "06:00" <= CURTIME() AND CURTIME() < "12:00" THEN "Г„Г®ГЎГ°Г®ГҐ ГіГІГ°Г®";
+      WHEN "12:00" <= CURTIME() AND CURTIME() < "18:00" THEN "Г„Г®ГЎГ°Г»Г© Г„ГҐГ­Гј";
+      WHEN "18:00" <= CURTIME() AND CURTIME() < "00:00" THEN "Г„Г®ГЎГ°Г»Г© ГўГҐГ·ГҐГ°";
+      ELSE "Г„Г®ГЎГ°Г®Г© Г­Г®Г·ГЁ";
   END CASE;
 END//
 
