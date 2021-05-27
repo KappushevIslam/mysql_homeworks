@@ -55,6 +55,9 @@ END //
 delimiter ;
 
 
+
+-- NoSQL
+
 -- Task 1
 > sadd ip '1' '2' '3'
 (integer) 3
